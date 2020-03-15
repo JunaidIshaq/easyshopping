@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
+
+
+   <TextView
+       android:id="@+id/badLinkTextView"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/goodLinkTextView"
+       android:layout_alignLeft="@+id/goodLinkTextView"
+       android:text="@string/processed_links_count"
+       android:textAppearance="?android:attr/textAppearanceLarge"
+       tools:layout_editor_absoluteX="92dp"
+       tools:layout_editor_absoluteY="416dp" />
+
+   <TextView
+       android:id="@+id/currentLinkTextView"
+       android:layout_width="match_parent"
+       android:layout_height="60dp"
+       android:layout_below="@+id/beginButton"
+       android:layout_alignRight="@+id/progressBar1"
+       android:ellipsize="end"
+       android:lines="3"
+       android:maxLines="3"
+       android:text="@string/current_link"
+       android:textAppearance="?android:attr/textAppearanceLarge"
+       tools:layout_editor_absoluteX="92dp"
+       tools:layout_editor_absoluteY="103dp" />
+
+   <TextView
+       android:id="@+id/goodLinkTextView"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/currentLinkTextView"
+       android:layout_alignParentLeft="true"
+       android:text="@string/links_count"
+       android:textAppearance="?android:attr/textAppearanceLarge"
+       tools:layout_editor_absoluteX="145dp"
+       tools:layout_editor_absoluteY="350dp" />
+
+   <EditText
+       android:id="@+id/urlEditText"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignLeft="@+id/beginButton"
+       android:layout_alignRight="@+id/progressBar1"
+       android:layout_alignParentTop="true"
+       android:layout_marginBottom="16dp"
+       android:ems="10"
+       android:hint="@string/enter_url"
+       android:inputType="textUri"
+       app:layout_constraintBottom_toTopOf="@+id/currentLinkTextView"
+       app:layout_constraintTop_toTopOf="parent"
+       tools:layout_editor_absoluteX="16dp" />
+
+   <Button
+       android:id="@+id/beginButton"
+       android:layout_width="120dp"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/urlEditText"
+       android:layout_alignLeft="@+id/currentLinkTextView"
+       android:background="@drawable/button"
+       android:onClick="beginButtonClicked"
+       android:text="@string/begin_text"
+       android:textColor="@android:color/white"
+       tools:layout_editor_absoluteX="145dp"
+       tools:layout_editor_absoluteY="277dp" />
+
+   <ProgressBar
+       android:id="@+id/progressBar1"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/urlEditText"
+       android:layout_alignParentRight="true"
+       android:visibility="invisible"
+       tools:layout_editor_absoluteX="181dp"
+       tools:layout_editor_absoluteY="196dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

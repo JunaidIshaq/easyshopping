@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "6141773522",
+    "firebase_url": "https://ionicshoppingapp-3754e.firebaseio.com",
+    "project_id": "ionicshoppingapp-3754e",
+    "storage_bucket": "ionicshoppingapp-3754e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6141773522:android:f4ff3678046044deab0f0b",
+        "android_client_info": {
+          "package_name": "com.example.easyshopping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "6141773522-72n0qqlumd0fj1r9cajuqvlphncq8unq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.easyshopping",
+            "certificate_hash": "40d31f2999e5cf467f80dd3a7d94cac4c3973c3d"
+          }
+        },
+        {
+          "client_id": "6141773522-fk6a6fbjeommlmatb6pqli5udugoid3j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbcrx3RKOQxKspMkZCV-uhhDMtlYrZFAw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "6141773522-fk6a6fbjeommlmatb6pqli5udugoid3j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6141773522:android:666edc639d794c72ab0f0b",
+        "android_client_info": {
+          "package_name": "com.project.easyshopping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "6141773522-0g4afvrpnjed7049k3shdim0sfnk1iha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.easyshopping",
+            "certificate_hash": "40d31f2999e5cf467f80dd3a7d94cac4c3973c3d"
+          }
+        },
+        {
+          "client_id": "6141773522-fk6a6fbjeommlmatb6pqli5udugoid3j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbcrx3RKOQxKspMkZCV-uhhDMtlYrZFAw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "6141773522-fk6a6fbjeommlmatb6pqli5udugoid3j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
