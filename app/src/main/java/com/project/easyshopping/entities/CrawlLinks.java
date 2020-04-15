@@ -7,9 +7,10 @@ import java.util.StringTokenizer;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.khalid.crawler.ApplicationEx;
-import com.khalid.crawler.interfaces.ICrawlerReportable;
-import com.khalid.crawler.queue.URLPool;
+import com.project.easyshopping.ApplicationEx;
+import com.project.easyshopping.interfaces.ICrawlerReportable;
+import com.project.easyshopping.queue.URLPool;
+
 
 public class CrawlLinks {
 	private ICrawlerReportable report;

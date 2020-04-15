@@ -1,13 +1,14 @@
 package com.project.easyshopping.queue;
 
+import android.content.Context;
+import android.util.Log;
+
+import com.project.easyshopping.interfaces.IPoolReportable;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import com.khalid.crawler.interfaces.IPoolReportable;
-
-import android.util.Log;
 
 
 public class URLPool {
@@ -18,9 +19,9 @@ public class URLPool {
 
 	private AtomicBoolean isPoolSizeReached = new AtomicBoolean();
 	
-	private Set<String> _URLPool = new HashSet<String>();
-	private LinkedList<String> urlPoolList = new LinkedList<String>();
-	private LinkedList<String> urlProcessedPoolList = new LinkedList<String>();
+	private Set<String> _URLPool = new HashSet<>();
+	private LinkedList<String> urlPoolList = new LinkedList<>();
+	private LinkedList<String> urlProcessedPoolList = new LinkedList<>();
 	
 		
 	public static URLPool getInstance(){
@@ -61,6 +62,7 @@ public class URLPool {
 		getUrlPoolList().clear();
 		_URLPool.clear();
 		getUrlProcessedPoolSet().clear();
+		isPoolSizeReached.set(Boolean.FALSE);
 	}
 	
 	
@@ -94,9 +96,9 @@ public class URLPool {
 	}
 	
 
-	public void setPoolListener(IPoolReportable lisetener)
+	public void setPoolListener(Context context)
 	{
-		this.listener = lisetener;
+		this.listener = (IPoolReportable) context;
 	}
 	
 

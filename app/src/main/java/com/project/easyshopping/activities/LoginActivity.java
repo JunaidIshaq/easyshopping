@@ -1,4 +1,4 @@
-package com.project.easyshopping.ui.login;
+package com.project.easyshopping.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -28,7 +28,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.project.easyshopping.R;
-import com.project.easyshopping.activities.MainActivity;
+import com.project.easyshopping.ui.login.LoggedInUserView;
+import com.project.easyshopping.ui.login.LoginFormState;
+import com.project.easyshopping.ui.login.LoginResult;
+import com.project.easyshopping.ui.login.LoginViewModel;
+import com.project.easyshopping.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -37,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
 
     private FirebaseUser currentUser;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +76,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
+        loginViewModel.getLoginResult().observe(this,
+                new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
                 if (loginResult == null) {
@@ -189,7 +195,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void sendUserToMainActivity() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
         startActivity(intent);
     }
 
@@ -197,8 +203,28 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(currentUser != null) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
             startActivity(intent);
         }
     }
+
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu, menu);
+//        return true;
+//    }
+
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.action_edit:
+//                /* DO EDIT */
+//                return true;
+//            case R.id.action_add:
+//                /* DO ADD */
+//                return true;
+//            case R.id.action_delete:
+//                /* DO DELETE */
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }

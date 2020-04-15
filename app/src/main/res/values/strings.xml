@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EasyShopping</string>
+    <string name="app_name">Easy Shopping</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -15,8 +15,22 @@
     <string name="current_link">Current Link :</string>
     <string name="links_count">Links count :</string>
     <string name="enter_url">Enter URL</string>
-    <string name="begin_text">Begin</string>
+    <string name="search">Search</string>
     <string name="processed_links_count">Processed links count :</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_signout">Sign Out</string>
+    <string name="cancle_text">Cancel</string>
+    <string name="list_view">List Videw</string>
+    <string name="cities_promote">Select City</string>
+
+    <string-array name="cities">
+        <item>Select City</item>
+        <item>Islamabad</item>
+        <item>Rawalpindi</item>
+        <item>Lahore</item>
+        <item>Karachi</item>
+        <item>Faisalabad</item>
+        <item>Quetta</item>
+        <item>Peshawar</item>
+    </string-array>
 </resources>

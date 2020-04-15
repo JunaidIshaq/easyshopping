@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="action_edit" type="id"></item>
+    <item name="action_add" type="id"></item>
+    <item name="action_delete" type="id"></item>
+    <item name="progressBar1" type="id" />
+    <item name="goodLinkTextView" type="id" />
+    <item name="beginButton" type="id" />
+    <item name="currentLinkTextView" type="id" />
+</resources>

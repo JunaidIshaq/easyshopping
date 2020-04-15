@@ -8,6 +8,9 @@ import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class Utility {
 
 	private Context mContext;
@@ -22,7 +25,7 @@ public class Utility {
 	 * @param context
 	 * @return true if connnection is available
 	 */
-	public final static boolean isIntenetAvailable(Context context) {
+	public final static boolean isInternetAvailable(Context context) {
 		if ((!isNetworkAvailable(context))
 				&& (!isWifiAvailable(context))) {
 			Toast.makeText(context, "Internet Unavailable", Toast.LENGTH_SHORT).show();
@@ -38,8 +41,7 @@ public class Utility {
 	 * @return
 	 */
 	private static boolean isNetworkAvailable(Context context) {
-		ConnectivityManager connec = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		ConnectivityManager connec = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo ni = connec.getActiveNetworkInfo();
 		if (ni != null && ni.isConnected()) {
 			return true;
@@ -55,10 +57,8 @@ public class Utility {
 	 * @return
 	 */
 	private static boolean isWifiAvailable(Context context) {
-		WifiManager connec = (WifiManager) context
-				.getSystemService(Context.WIFI_SERVICE);
-		ConnectivityManager connec1 = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		WifiManager connec = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+		ConnectivityManager connec1 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		State wifi = connec1.getNetworkInfo(1).getState();
 		if (connec.isWifiEnabled()
 				&& wifi.toString().equalsIgnoreCase("CONNECTED")) {
@@ -71,8 +71,8 @@ public class Utility {
 	/**
 	 * validates text field
 	 * 
-	 * @param String url
-	 * @param Context 
+	 * @param url
+	 * @param context
 	 * @return
 	 */
 	public static boolean validatURL(String url, Context context) {
@@ -99,6 +99,18 @@ public class Utility {
 		if (link.startsWith("https://"))
 			return true;
 		return false;
+	}
+
+	public static String getBaseUrl(String url) {
+		try {
+			if(url != null){
+				URL obj = new URL(url);
+				return obj.getProtocol() + "://" + obj.getHost();
+			}
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		return url;
 	}
 	
 
