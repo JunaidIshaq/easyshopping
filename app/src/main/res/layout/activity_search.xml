@@ -15,7 +15,8 @@
         android:layout_height="59dp"
         android:layout_alignEnd="@+id/progressBar1"
         android:prompt="@string/cities_promote"
-        android:textColor="@color/colorWhite" />
+        android:textColor="@color/colorWhite"
+        android:popupBackground="#4057DA"/>
 
     <Spinner
         android:id="@+id/categories"
@@ -23,7 +24,8 @@
         android:layout_height="59dp"
         android:layout_alignEnd="@+id/progressBar1"
         android:prompt="@string/cities_promote"
-        android:textColor="@color/colorWhite" />
+        android:textColor="@color/colorWhite"
+        android:popupBackground="#4057DA"/>
 
     <Button
         android:id="@+id/beginButton"

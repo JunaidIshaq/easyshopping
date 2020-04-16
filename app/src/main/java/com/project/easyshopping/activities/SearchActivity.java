@@ -75,6 +75,9 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 		currentUser = firebaseAuth.getCurrentUser().toString();
 		progressDialog = new ProgressDialog(this);
 		listView = findViewById(R.id.list);
+		cities = findViewById(R.id.cities);
+		categories = findViewById(R.id.categories);
+		btnSubmit = findViewById(R.id.beginButton);
 		rowItems = new ArrayList<>();
 		addListenerOnButton();
 		addListenerOnSpinnerItemSelection();
@@ -104,10 +107,6 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	}
 
 	private void addListenerOnButton() {
-
-		cities = findViewById(R.id.cities);
-		categories = findViewById(R.id.categories);
-		btnSubmit = findViewById(R.id.beginButton);
 
 		btnSubmit.setOnClickListener(new View.OnClickListener() {
 
@@ -146,8 +145,6 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	}
 
 	private void addListenerOnSpinnerItemSelection() {
-		cities = findViewById(R.id.cities);
-		categories = findViewById(R.id.categories);
 		cities.setOnItemSelectedListener(this);
 		categories.setOnItemSelectedListener(this);
 		List<String> citiesList = new ArrayList<>();
