@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                                 else {
                                     String message = task.getException().getMessage();
-                                    Toast.makeText(LoginActivity.this, "Error : " + message, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this, "Sorry " + message, Toast.LENGTH_LONG).show();
                                     loadingProgressDialog.dismiss();
                                 }
                             }
@@ -171,7 +171,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                                 else {
                                     String message = task.getException().getMessage();
-                                    Toast.makeText(LoginActivity.this, "Error : " + message, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this, "Sorry " + message, Toast.LENGTH_LONG).show();
                                     loadingProgressDialog.dismiss();
                                 }
                             }

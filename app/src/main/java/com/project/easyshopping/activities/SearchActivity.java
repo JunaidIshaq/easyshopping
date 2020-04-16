@@ -129,7 +129,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 				String cX = "";
 				URL url = null;
 				try {
-					url = new URL(searchAPI.append(searchCategory).append("%20").append("Shops%20").append("in%20").append(searchCity).toString());
+					url = new URL(searchAPI.append(searchCategory).append("%20").append("Order%20Online%20").append("in%20").append(searchCity).toString());
 				} catch (MalformedURLException ex ){
 					Log.e(TAG, "Error Creating String to URL " + ex.toString());
 				}
