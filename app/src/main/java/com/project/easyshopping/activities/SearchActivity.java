@@ -41,7 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class SearchActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class SearchActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
 	private FirebaseAuth firebaseAuth;
 	String currentUser;
@@ -56,6 +56,11 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	List<RowItem> rowItems;
 	ListView listView;
 	CustomAdapter customAdapter;
+	String googleApiKey = "";
+	String cX = "";
+	String searchCategory;
+	String searchCity;
+	String googleSearchAPI = "https://www.googleapis.com/customsearch/v1?key=AIzaSyCbcrx3RKOQxKspMkZCV-uhhDMtlYrZFAw&cx=004505579087157181330:ppsddjwrvuz&q=";
 
 	private static final String TAG = "Search Activity";
 	static String result = null;
@@ -73,7 +78,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 		rowItems = new ArrayList<>();
 		addListenerOnButton();
 		addListenerOnSpinnerItemSelection();
-		listView.setOnItemClickListener((AdapterView.OnItemClickListener) SearchActivity.this);
+		listView.setOnItemClickListener(SearchActivity.this);
 	}
 
 
@@ -108,27 +113,32 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 
 			@Override
 			public void onClick(View v) {
-//				Toast.makeText(SearchActivity.this, "OnClickListener : \nCities: "+ cities.getSelectedItem(), Toast.LENGTH_SHORT).show();
-				// show mProgressBar
+				StringBuilder searchAPI = new StringBuilder(googleSearchAPI);
+				if(searchCity == null) {
+					Toast.makeText(SearchActivity.this, "Please select city", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				else if(searchCategory == null) {
+					Toast.makeText(SearchActivity.this,"Please select category", Toast.LENGTH_SHORT).show();
+					return;
+				}
 				progressDialog.setTitle("Searching Near By Stores");
 				progressDialog.setMessage("Please wait...");
 				progressDialog.setCanceledOnTouchOutside(true);
 				progressDialog.show();
 				String searchText = "Food in Islamabad";
-				String googleApiKey = "";
 				String cX = "";
-				String urlString = "https://www.googleapis.com/customsearch/v1?key=AIzaSyCbcrx3RKOQxKspMkZCV-uhhDMtlYrZFAw&cx=004505579087157181330:ppsddjwrvuz&q=Pizza%20Shops%20in%20islamabad";
 				URL url = null;
 				try {
-					url = new URL(urlString);
+					url = new URL(searchAPI.append(searchCategory).append("%20").append("Shops%20").append("in%20").append(searchCity).toString());
 				} catch (MalformedURLException ex ){
 					Log.e(TAG, "Error Creating String to URL " + ex.toString());
 				}
-				Log.d(TAG, "Url = "+  urlString);
+				Log.d(TAG, "Url = "+  url.toString());
 
 				GoogleSearchAsyncTask searchTask = new GoogleSearchAsyncTask();
 				searchTask.execute(url);
-				customAdapter = new CustomAdapter(SearchActivity.this , rowItems);
+				rowItems.clear();
 
 			}
 
@@ -138,8 +148,8 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	private void addListenerOnSpinnerItemSelection() {
 		cities = findViewById(R.id.cities);
 		categories = findViewById(R.id.categories);
-		cities.setOnItemSelectedListener(new CustomOnItemSelectedListener());
-		categories.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+		cities.setOnItemSelectedListener(this);
+		categories.setOnItemSelectedListener(this);
 		List<String> citiesList = new ArrayList<>();
 		List<String> categoriesList = new ArrayList<>();
 		citiesList.add("Select City");
@@ -220,6 +230,20 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 		} else {
 			super.onBackPressed();
 		}
+	}
+
+	@Override
+	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+		if(parent.getId() == R.id.categories && position > 0){
+			searchCategory = (String) parent.getItemAtPosition(position);
+		}else if(parent.getId() == R.id.cities && position > 0)  {
+			searchCity = (String) parent.getItemAtPosition(position);
+		}
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> parent) {
+
 	}
 
 	private class GoogleSearchAsyncTask extends AsyncTask<URL, Integer, String> {

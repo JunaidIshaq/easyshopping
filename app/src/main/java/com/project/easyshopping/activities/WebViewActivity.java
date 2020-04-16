@@ -37,7 +37,7 @@ public class WebViewActivity extends AppCompatActivity {
         Intent intent = getIntent();
         title = intent.getStringExtra("title");
         webUrl = intent.getStringExtra("url");
-        progressDialog = ProgressDialog.show(WebViewActivity.this, " In Progress", "Loading...");
+        progressDialog = ProgressDialog.show(WebViewActivity.this, " Please wait", "Loading...");
         getSupportActionBar().setTitle(title);
         mWebView = findViewById(R.id.web_view);
         mWebView.getSettings().setJavaScriptEnabled(true);
