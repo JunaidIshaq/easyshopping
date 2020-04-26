@@ -12,8 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.easyshopping.R;
 
-public class SplashScreenActivity extends AppCompatActivity {
-
+public class FrontPage extends AppCompatActivity {
     Button but;
     Animation frombottom, fromtop;
     ImageView img;
@@ -23,10 +22,10 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_splashscreen);
+        setContentView(R.layout.activity_main);
 
-        but= findViewById(R.id.btn);
-        img= findViewById(R.id.img1);
+        but=(Button)findViewById(R.id.btn);
+        img=(ImageView) findViewById(R.id.img1) ;
 
         frombottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
         fromtop= AnimationUtils.loadAnimation(this,R.anim.fromtop);
@@ -38,7 +37,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
     public void onclick(View view)
     {
-        Intent i= new Intent( SplashScreenActivity.this, LoginActivity.class);
+        Intent i= new Intent( FrontPage.this, LoginActivity.class);
         startActivity(i);
     }
 }
