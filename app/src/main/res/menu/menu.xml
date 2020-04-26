@@ -12,4 +12,16 @@
         android:orderInCategory="100"
         android:title="@string/menu_signout"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_help"
+        android:orderInCategory="100"
+        android:title="@string/menu_help"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_feedback"
+        android:orderInCategory="100"
+        android:title="@string/menu_feedback"
+        app:showAsAction="never" />
 </menu>
