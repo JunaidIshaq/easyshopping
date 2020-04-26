@@ -1,30 +1,46 @@
 package com.project.easyshopping.activities;
-
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.easyshopping.R;
 
-import gr.net.maroulis.library.EasySplashScreen;
-
 public class SplashScreenActivity extends AppCompatActivity {
 
+    Button but;
+    Animation frombottom, fromtop;
+    ImageView img;
+    Intent i;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_splashscreen);
 
-        EasySplashScreen config = new EasySplashScreen(SplashScreenActivity.this)
-                .withFullScreen()
-                .withTargetActivity(LoginActivity.class)
-                .withSplashTimeOut(3000)
-                .withBackgroundColor(Color.parseColor("#4763FF"))
-                .withLogo(R.drawable.easy_shopping_logo);
+        but= findViewById(R.id.btn);
+        img= findViewById(R.id.img1);
 
-        View easySplashScreen = config.create();
-        setContentView(easySplashScreen);
+        frombottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
+        fromtop= AnimationUtils.loadAnimation(this,R.anim.fromtop);
+
+        but.setAnimation(frombottom);
+        img.setAnimation(fromtop);
+
+
+    }
+    public void onclick(View view)
+    {
+        Intent i= new Intent( SplashScreenActivity.this, LoginActivity.class);
+        startActivity(i);
     }
 }
+
+

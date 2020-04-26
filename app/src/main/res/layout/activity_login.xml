@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.LoginActivity"
-    android:background="#4057DA">
+    android:background="#D928327E">
 
     <EditText
         android:id="@+id/email"
@@ -68,12 +68,12 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="564dp"
-        android:layout_height="177dp"
+        android:layout_height="250dp"
         android:layout_gravity="top"
-        android:src="@drawable/heading"
+        android:src="@drawable/easyshop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
