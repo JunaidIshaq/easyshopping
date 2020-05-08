@@ -23,7 +23,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.project.easyshopping.R;
 import com.project.easyshopping.data.model.CustomAdapter;
 import com.project.easyshopping.data.model.RowItem;
-import com.project.easyshopping.listeners.CustomOnItemSelectedListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -132,7 +131,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 				String cX = "";
 				URL url = null;
 				try {
-					url = new URL(searchAPI.append(searchCategory).append("%20").append(searchSubCategory).append("%20").append("Order%20Online%20").append("in%20").append(searchCity).toString());
+					url = new URL(searchAPI.append(searchCategory).append("%20").append(joinString(searchSubCategory.split("\\s"))).append("%20").append("Order%20Online%20").append("in%20").append(searchCity).toString());
 				} catch (MalformedURLException ex ){
 					Log.e(TAG, "Error Creating String to URL " + ex.toString());
 				}
@@ -376,4 +375,17 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 		}
 	}
 
+	/**
+	 *  String[] is concatenated with %20 because it is a space in subcategory
+	 *  It needs to be removed.
+	 * @param element
+	 * @return
+	 */
+	private String joinString(String[] element) {
+		String mergeString = null;
+		for(int i = 0; i < (element.length -1); i++ ) {
+			mergeString = element[i] + "%20";
+		}
+		return mergeString + element[element.length - 1 ];
+	}
 }
