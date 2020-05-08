@@ -47,6 +47,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	String currentUser;
 	private Spinner cities;
 	private Spinner categories;
+	private Spinner subCategories;
 	private Button btnSubmit;
 	private WebView mWebView;
 	ProgressDialog progressDialog;
@@ -59,6 +60,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	String googleApiKey = "";
 	String cX = "";
 	String searchCategory;
+	String searchSubCategory;
 	String searchCity;
 	String googleSearchAPI = "https://www.googleapis.com/customsearch/v1?key=AIzaSyCbcrx3RKOQxKspMkZCV-uhhDMtlYrZFAw&cx=004505579087157181330:ppsddjwrvuz&q=";
 
@@ -77,6 +79,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 		listView = findViewById(R.id.list);
 		cities = findViewById(R.id.cities);
 		categories = findViewById(R.id.categories);
+		subCategories = findViewById(R.id.subcategories);
 		btnSubmit = findViewById(R.id.beginButton);
 		rowItems = new ArrayList<>();
 		addListenerOnButton();
@@ -121,7 +124,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 					Toast.makeText(SearchActivity.this,"Please select category", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				progressDialog.setTitle("Searching Near By Stores");
+				progressDialog.setTitle("Searching Popular E Stores");
 				progressDialog.setMessage("Please wait...");
 				progressDialog.setCanceledOnTouchOutside(true);
 				progressDialog.show();
@@ -129,7 +132,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 				String cX = "";
 				URL url = null;
 				try {
-					url = new URL(searchAPI.append(searchCategory).append("%20").append("Order%20Online%20").append("in%20").append(searchCity).toString());
+					url = new URL(searchAPI.append(searchCategory).append("%20").append(searchSubCategory).append("%20").append("Order%20Online%20").append("in%20").append(searchCity).toString());
 				} catch (MalformedURLException ex ){
 					Log.e(TAG, "Error Creating String to URL " + ex.toString());
 				}
@@ -147,8 +150,10 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	private void addListenerOnSpinnerItemSelection() {
 		cities.setOnItemSelectedListener(this);
 		categories.setOnItemSelectedListener(this);
+		subCategories.setOnItemSelectedListener(this);
 		List<String> citiesList = new ArrayList<>();
 		List<String> categoriesList = new ArrayList<>();
+		List<String> subCategoriesList = new ArrayList<>();
 		citiesList.add("Select City");
 		citiesList.add("Islamabad");
 		citiesList.add("Rawalpindi");
@@ -164,6 +169,8 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 		categoriesList.add("Phones");
 		categoriesList.add("Cars");
 
+		subCategoriesList.add("Select SubCategory");
+
 
 		// Creating adapter for spinner
 		ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<>(this, R.layout.spinner_item, citiesList);
@@ -172,12 +179,16 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 		ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<>(this, R.layout.spinner_item, categoriesList);
 		dataAdapter2.setDropDownViewResource(R.layout.spinner_item);
 
+		ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<>(this, R.layout.spinner_item, subCategoriesList);
+		dataAdapter3.setDropDownViewResource(R.layout.spinner_item);
+
 //		// Drop down layout style - list view with radio button
 //		dataAdapter.setDropDownViewResource(R.layout.spinner_item);
 
 		// attaching data adapter to spinner
 		cities.setAdapter(dataAdapter1);
 		categories.setAdapter(dataAdapter2);
+		subCategories.setAdapter(dataAdapter3);
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -231,10 +242,31 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+		ArrayAdapter<String> dataAdapter = null;
 		if(parent.getId() == R.id.categories && position > 0){
 			searchCategory = (String) parent.getItemAtPosition(position);
+			List<String> subCategoresList = new ArrayList();
+			if(parent.getSelectedItem() == "Food"){
+				subCategoresList.add("Fast Food");
+				subCategoresList.add("Restaurants");
+			}else if(parent.getSelectedItem() == "Clothing"){
+				subCategoresList.add("Brands");
+				subCategoresList.add("Mall");
+			}else if(parent.getSelectedItem() == "Phones"){
+				subCategoresList.add("Brand New");
+				subCategoresList.add("Used");
+			}else if(parent.getSelectedItem() == "Cars"){
+				subCategoresList.add("Brand New");
+				subCategoresList.add("Used");
+			}
+			dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, subCategoresList);
+			dataAdapter.setDropDownViewResource(R.layout.spinner_item);
+			subCategories.setAdapter(dataAdapter);
+			searchSubCategory = subCategoresList.get(0);
 		}else if(parent.getId() == R.id.cities && position > 0)  {
 			searchCity = (String) parent.getItemAtPosition(position);
+		}else if(parent.getId() == R.id.subcategories){
+			searchSubCategory = (String) parent.getItemAtPosition(position);
 		}
 	}
 

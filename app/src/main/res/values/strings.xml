@@ -23,7 +23,9 @@
     <string name="menu_feedback">Feed Back</string>
     <string name="cancle_text">Cancel</string>
     <string name="list_view">List Videw</string>
-    <string name="cities_promote">Select City</string>
+    <string name="select_city">Select City</string>
+    <string name="select_category">Select Category</string>
+    <string name="select_subcategory">Select SubCategory</string>
 
     <string-array name="cities">
         <item>Select City</item>
