@@ -20,9 +20,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.project.easyshopping.R;
 import com.project.easyshopping.data.model.CustomAdapter;
 import com.project.easyshopping.data.model.RowItem;
+import com.project.easyshopping.entities.SearchHistoryDTO;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,13 +39,13 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 
 public class SearchActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
-	private FirebaseAuth firebaseAuth;
 	String currentUser;
 	private Spinner cities;
 	private Spinner categories;
@@ -68,11 +71,18 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	Integer responseCode = null;
 	String responseMessage = "";
 
+	private FirebaseDatabase firebaseDatabase;
+	private FirebaseAuth firebaseAuth;
+	private FirebaseAuth.AuthStateListener authListener;
+	private DatabaseReference databaseReference;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search);
 		firebaseAuth = FirebaseAuth.getInstance();
+		firebaseDatabase = FirebaseDatabase.getInstance();
+		databaseReference = firebaseDatabase.getReference("message");
 		currentUser = firebaseAuth.getCurrentUser().toString();
 		progressDialog = new ProgressDialog(this);
 		listView = findViewById(R.id.list);
@@ -89,6 +99,10 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		SearchHistoryDTO dto = new SearchHistoryDTO(new Date(), rowItems.get(position).getLink());
+		if(!dto.equals("")){
+			databaseReference.setValue(dto);
+		}
 		Intent intent = new Intent(SearchActivity.this, WebViewActivity.class);
 		intent.putExtra("title", rowItems.get(position).getTitle());
 		intent.putExtra("url", rowItems.get(position).getLink());
