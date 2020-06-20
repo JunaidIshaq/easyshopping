@@ -95,19 +95,6 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 		startActivity(intent);
 	}
 
-
-	private void addCities() {
-
-//		cities = findViewById(R.id.cities);
-//		List<String> list = new ArrayList<>();
-//		list.add("list 1");
-//		list.add("list 2");
-//		list.add("list 3");
-//		ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list);
-//		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//		spinner2.setAdapter(dataAdapter);
-	}
-
 	private void addListenerOnButton() {
 
 		btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +118,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 				String cX = "";
 				URL url = null;
 				try {
-					url = new URL(searchAPI.append(searchCategory).append("%20").append(joinString(searchSubCategory.split("\\s"))).append("%20").append("Order%20Online%20").append("in%20").append(searchCity).toString());
+					url = new URL(searchAPI.append(searchCategory).append("%20").append(joinString(searchSubCategory.split("\\s"))).append("%20").append("Order%20Online%20").append("in%20").append(searchCity).append("&filter=true").toString());
 				} catch (MalformedURLException ex ){
 					Log.e(TAG, "Error Creating String to URL " + ex.toString());
 				}
@@ -181,8 +168,6 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 		ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<>(this, R.layout.spinner_item, subCategoriesList);
 		dataAdapter3.setDropDownViewResource(R.layout.spinner_item);
 
-//		// Drop down layout style - list view with radio button
-//		dataAdapter.setDropDownViewResource(R.layout.spinner_item);
 
 		// attaching data adapter to spinner
 		cities.setAdapter(dataAdapter1);
@@ -348,9 +333,6 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 			progressDialog.dismiss();
 
 			// make TextView scrollable
-//			textView.setMovementMethod(new ScrollingMovementMethod());
-//			// show result
-//			textView.setText(result);
 			Log.d("GoogleSearchAsyncTask", "onPostExecute Method");
 			List<HashMap<String, String>> searchList = null;
 			try {
