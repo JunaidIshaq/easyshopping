@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.SearchActivity"
-    android:background="#4057DA"
+    android:background="@drawable/backg"
     android:orientation="vertical">
 
     <TableRow
@@ -28,7 +28,7 @@
             android:layout_alignEnd="@+id/progressBar1"
             android:popupBackground="#4057DA"
             android:prompt="@string/select_city"
-            android:textColor="@color/colorWhite" />
+            android:textColor="#0F0E10" />
     </TableRow>
 
     <TableRow
@@ -49,7 +49,7 @@
             android:layout_height="59dp"
             android:layout_alignEnd="@+id/progressBar1"
             android:prompt="@string/select_category"
-            android:textColor="@color/colorWhite"
+            android:textColor="#0A0A0B"
             android:popupBackground="#4057DA"/>
     </TableRow>
 
@@ -71,7 +71,7 @@
             android:layout_height="59dp"
             android:layout_alignEnd="@+id/progressBar1"
             android:prompt="@string/select_subcategory"
-            android:textColor="@color/colorWhite"
+            android:textColor="#090809"
             android:popupBackground="#4057DA"/>
     </TableRow>
 
@@ -81,7 +81,7 @@
         android:layout_height="50dp"
         android:layout_margin="20dp"
         android:text="@string/search"
-        android:background="@color/colorPrimary"
+        android:background="#F6A630"
         android:textColor="@color/colorWhite" />
 
     <ListView
