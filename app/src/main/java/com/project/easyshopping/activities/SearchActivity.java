@@ -19,6 +19,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpRequestInitializer;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.services.customsearch.Customsearch;
+import com.google.api.services.customsearch.model.Result;
+import com.google.api.services.customsearch.model.Search;
 import com.google.firebase.auth.FirebaseAuth;
 import com.project.easyshopping.R;
 import com.project.easyshopping.data.model.CustomAdapter;
@@ -31,6 +38,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -53,17 +61,20 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	String[] websiteTitles;
 	URI[] imageLinks;
 	String[] description;
-	List<RowItem> rowItems;
+	ArrayList<RowItem> rowItems;
 	ListView listView;
 	CustomAdapter customAdapter;
 	String googleApiKey = "";
 	String cX = "";
+	StringBuilder searchQuery = new StringBuilder();
 	String searchCategory;
 	String searchSubCategory;
 	String searchCity;
 	String googleSearchAPI = "https://www.googleapis.com/customsearch/v1?key=AIzaSyCbcrx3RKOQxKspMkZCV-uhhDMtlYrZFAw&cx=004505579087157181330:ppsddjwrvuz&q=";
-
+	private static final String GOOGLE_API_KEY = "AIzaSyCbcrx3RKOQxKspMkZCV-uhhDMtlYrZFAw";
+	private static final String SEARCH_ENGINE_ID = "004505579087157181330:ppsddjwrvuz";
 	private static final String TAG = "Search Activity";
+	private static final int HTTP_REQUEST_TIMEOUT = 3 * 600000;
 	static String result = null;
 	Integer responseCode = null;
 	String responseMessage = "";
@@ -118,7 +129,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 				String cX = "";
 				URL url = null;
 				try {
-					url = new URL(searchAPI.append(searchCategory).append("%20").append(joinString(searchSubCategory.split("\\s"))).append("%20").append("Order%20Online%20").append("in%20").append(searchCity).append("&filter=true").toString());
+					url = new URL(searchAPI.append(searchCategory).append("%20").append(joinString(searchSubCategory.split("\\s"))).append("%20").append("Order%20Online%20").append("in%20").append(searchCity).append("&alt=json").toString());
 				} catch (MalformedURLException ex ){
 					Log.e(TAG, "Error Creating String to URL " + ex.toString());
 				}
@@ -126,11 +137,54 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 
 				GoogleSearchAsyncTask searchTask = new GoogleSearchAsyncTask();
 				searchTask.execute(url);
+//				List<Result> results = search(searchQuery.append(searchCategory).append("%20").append(joinString(searchSubCategory.split("\\s"))).append("%20").append("Order%20Online%20").append("in%20").append(searchCity).append("&alt=json").toString());
+//				setAdapter(results);
 				rowItems.clear();
 
 			}
 
 		});
+	}
+
+	public void setAdapter(List<Result> results) {
+//		for(Result result : results) {
+//			RowItem rowItem = new RowItem(result.getTitle(), result.getImage(), result.getFormattedUrl());
+//			rowItems.add(rowItem);
+//		}
+//		customAdapter = new CustomAdapter(SearchActivity.this , rowItems);
+//		listView.setAdapter(customAdapter);
+	}
+
+	public static List<Result> search(String keyword){
+		Customsearch customsearch= null;
+		try {
+			customsearch = new Customsearch(new NetHttpTransport(),new JacksonFactory(), new HttpRequestInitializer() {
+				public void initialize(HttpRequest httpRequest) {
+					try {
+						// set connect and read timeouts
+						httpRequest.setConnectTimeout(HTTP_REQUEST_TIMEOUT);
+						httpRequest.setReadTimeout(HTTP_REQUEST_TIMEOUT);
+
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		List<Result> resultList=null;
+		try {
+			Customsearch.Cse.List list=customsearch.cse().list("Food in Islamabad");
+			list.setKey(GOOGLE_API_KEY);
+			list.setCx(SEARCH_ENGINE_ID);
+			Search results=list.execute();
+			resultList=results.getItems();
+		}
+		catch (  Exception e) {
+			e.printStackTrace();
+		}
+		return resultList;
 	}
 
 	private void addListenerOnSpinnerItemSelection() {
@@ -279,6 +333,8 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 
 			try {
 				conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("GET");
+				conn.setRequestProperty("Accept", "application/json");
 			} catch (IOException e) {
 				Log.e(TAG, "Http Connection Error " + e.toString());
 			}

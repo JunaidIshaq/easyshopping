@@ -1,18 +1,17 @@
 package com.project.easyshopping.data.model;
 
-import android.net.Uri;
-
+import com.google.api.services.customsearch.model.Result;
 import com.project.easyshopping.util.Utility;
 
 public class RowItem {
 
     private String title;
-    private int imageId;
+    private int image;
     private String link;
 
-    public RowItem(String title, int imageId, String link) {
+    public RowItem(String title, int image, String link) {
         this.title = title;
-        this.imageId = imageId;
+        this.image = image;
         this.link = Utility.getBaseUrl(link);
     }
 
@@ -24,12 +23,12 @@ public class RowItem {
         this.title = title;
     }
 
-    public int getImageId() {
-        return imageId;
+    public int getImage() {
+        return image;
     }
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setImage(int image) {
+        this.image = image;
     }
 
     public String getLink() {
@@ -44,7 +43,7 @@ public class RowItem {
     public String toString() {
         return "RowItem{" +
                 "title='" + title + '\'' +
-                ", imageId='" + imageId + '\'' +
+                ", image='" + image + '\'' +
                 ", link='" + link + '\'' +
                 '}';
     }
