@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#8496FA"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/newtext"
+        android:background="#0E0D0D"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="@string/faq"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="30dp"
+        android:textSize="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    
+
+</RelativeLayout>
