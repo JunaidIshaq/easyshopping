@@ -1,6 +1,5 @@
 package com.project.easyshopping.data.model;
 
-import com.google.api.services.customsearch.model.Result;
 import com.project.easyshopping.util.Utility;
 
 public class RowItem {

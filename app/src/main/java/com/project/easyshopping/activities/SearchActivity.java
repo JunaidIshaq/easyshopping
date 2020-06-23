@@ -19,13 +19,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.api.client.http.HttpRequest;
-import com.google.api.client.http.HttpRequestInitializer;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.customsearch.Customsearch;
-import com.google.api.services.customsearch.model.Result;
-import com.google.api.services.customsearch.model.Search;
 import com.google.firebase.auth.FirebaseAuth;
 import com.project.easyshopping.R;
 import com.project.easyshopping.data.model.CustomAdapter;
@@ -38,7 +31,6 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -144,47 +136,6 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 			}
 
 		});
-	}
-
-	public void setAdapter(List<Result> results) {
-//		for(Result result : results) {
-//			RowItem rowItem = new RowItem(result.getTitle(), result.getImage(), result.getFormattedUrl());
-//			rowItems.add(rowItem);
-//		}
-//		customAdapter = new CustomAdapter(SearchActivity.this , rowItems);
-//		listView.setAdapter(customAdapter);
-	}
-
-	public static List<Result> search(String keyword){
-		Customsearch customsearch= null;
-		try {
-			customsearch = new Customsearch(new NetHttpTransport(),new JacksonFactory(), new HttpRequestInitializer() {
-				public void initialize(HttpRequest httpRequest) {
-					try {
-						// set connect and read timeouts
-						httpRequest.setConnectTimeout(HTTP_REQUEST_TIMEOUT);
-						httpRequest.setReadTimeout(HTTP_REQUEST_TIMEOUT);
-
-					} catch (Exception ex) {
-						ex.printStackTrace();
-					}
-				}
-			});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		List<Result> resultList=null;
-		try {
-			Customsearch.Cse.List list=customsearch.cse().list("Food in Islamabad");
-			list.setKey(GOOGLE_API_KEY);
-			list.setCx(SEARCH_ENGINE_ID);
-			Search results=list.execute();
-			resultList=results.getItems();
-		}
-		catch (  Exception e) {
-			e.printStackTrace();
-		}
-		return resultList;
 	}
 
 	private void addListenerOnSpinnerItemSelection() {
