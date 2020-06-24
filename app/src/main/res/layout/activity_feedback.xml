@@ -116,7 +116,7 @@
         android:layout_marginTop="45dp" />
 
     <Button
-        android:id="@+id/beginButton"
+        android:id="@+id/Button"
         android:layout_width="match_parent"
         android:layout_below="@id/rate"
         android:layout_height="50dp"
@@ -124,5 +124,6 @@
         android:text="Submit"
         android:textStyle="bold"
         android:textSize="20dp"
+        android:onClick="onclick"
         android:textColor="@color/colorWhite" />
 </RelativeLayout>
