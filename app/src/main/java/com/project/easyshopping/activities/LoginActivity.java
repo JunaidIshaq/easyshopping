@@ -208,23 +208,4 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu, menu);
-//        return true;
-//    }
-
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_edit:
-//                /* DO EDIT */
-//                return true;
-//            case R.id.action_add:
-//                /* DO ADD */
-//                return true;
-//            case R.id.action_delete:
-//                /* DO DELETE */
-//                return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 }

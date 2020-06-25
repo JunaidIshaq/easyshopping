@@ -202,6 +202,13 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 				Toast.makeText(SearchActivity.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
 				break;
 			}
+
+			case R.id.menu_feedback: {
+				finish();
+				Intent intent = new Intent(SearchActivity.this, FeedbackActivity.class);
+				startActivity(intent);
+				break;
+			}
 		}
 		return super.onOptionsItemSelected(item);
 	}

@@ -29,6 +29,9 @@
         <activity
             android:name=".activities.WebViewActivity">
         </activity>
+        <activity
+            android:name=".activities.FeedbackActivity">
+        </activity>
     </application>
 
 </manifest>
