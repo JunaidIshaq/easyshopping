@@ -190,22 +190,30 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 			case R.id.menu_sign_out: {
 				// Destroying login season.
 				firebaseAuth.signOut();
-
-				// Finishing current User Profile activity.
+				// Finishing current activity.
 				finish();
-
 				// Redirect to Login Activity after click on logout button.
 				Intent intent = new Intent(SearchActivity.this, LoginActivity.class);
 				startActivity(intent);
-
 				// Showing toast message on logout.
 				Toast.makeText(SearchActivity.this, "Logged Out Successfully.", Toast.LENGTH_LONG).show();
 				break;
 			}
 
 			case R.id.menu_feedback: {
+				// Finishing current activity.
 				finish();
+				// Redirect to Feedback Activity.
 				Intent intent = new Intent(SearchActivity.this, FeedbackActivity.class);
+				startActivity(intent);
+				break;
+			}
+
+			case R.id.menu_faq: {
+				// Finishing current activity.
+				finish();
+				// Redirect to Feedback Activity.
+				Intent intent = new Intent(SearchActivity.this, FaqsActivity.class);
 				startActivity(intent);
 				break;
 			}

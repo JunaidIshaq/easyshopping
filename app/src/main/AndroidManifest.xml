@@ -32,6 +32,10 @@
         <activity
             android:name=".activities.FeedbackActivity">
         </activity>
+
+        <activity
+            android:name=".activities.FaqsActivity">
+        </activity>
     </application>
 
 </manifest>
