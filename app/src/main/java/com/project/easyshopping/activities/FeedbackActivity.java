@@ -58,7 +58,7 @@ public class FeedbackActivity extends AppCompatActivity
                 dto.setRate(String.valueOf(rate.getRating()));
                 dto.setDateTime(new Date());
                 sendUserFeedBack(FirebaseAuth.getInstance().getUid(), dto);
-                Toast.makeText(FeedbackActivity.this, "Your FeedBack Sent Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FeedbackActivity.this, "Your feedback saved successfully", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -70,6 +70,6 @@ public class FeedbackActivity extends AppCompatActivity
 
     private void sendUserFeedBack(String userId, FeedBackDTO dto) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        reference.child("users").child(userId).setValue(dto);
+        reference.child("users_feedback").child(userId).setValue(dto);
     }
 }
