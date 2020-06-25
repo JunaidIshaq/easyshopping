@@ -16,7 +16,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.project.easyshopping.R;
 import com.project.easyshopping.data.model.FeedBackDTO;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FeedbackActivity extends AppCompatActivity
@@ -38,11 +37,17 @@ public class FeedbackActivity extends AppCompatActivity
         setContentView(R.layout.activity_feedback);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // add back arrow to toolbar
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
         name= findViewById(R.id.edit1);
         email = findViewById(R.id.edit2);
         city= findViewById(R.id.edit3);
         message = findViewById(R.id.edit4);
-        sendmessage= findViewById(R.id.Button);
+        sendmessage= findViewById(R.id.sendMessage);
         rate = findViewById(R.id.rate);
 
 
@@ -71,5 +76,12 @@ public class FeedbackActivity extends AppCompatActivity
     private void sendUserFeedBack(String userId, FeedBackDTO dto) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         reference.child("users_feedback").child(userId).setValue(dto);
+    }
+
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
