@@ -67,7 +67,7 @@
         android:layout_below="@id/text2"
         android:layout_marginTop="-16dp"
         android:gravity="left"
-        android:hint="enter you email"
+        android:hint="enter your email"
         android:inputType="textEmailAddress"
         android:textColor="@android:color/white"
         android:textSize="20dp" />
@@ -111,7 +111,7 @@
         android:layout_below="@id/text4"
         android:layout_marginTop="-17dp"
         android:gravity="left"
-        android:hint="enter your city name"
+        android:hint="enter Message"
         android:inputType="textLongMessage"
         android:maxLength="190"
         android:textColor="@android:color/white"
@@ -121,6 +121,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
+        android:progressBackgroundTint="@android:color/white"
+        android:progressTint="@android:color/black"
         android:layout_below="@id/edit4"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp" />
