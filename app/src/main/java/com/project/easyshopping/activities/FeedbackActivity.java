@@ -1,5 +1,6 @@
 package com.project.easyshopping.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -83,5 +84,12 @@ public class FeedbackActivity extends AppCompatActivity
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(this,SearchActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
