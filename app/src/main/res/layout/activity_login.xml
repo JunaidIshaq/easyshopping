@@ -7,35 +7,39 @@
     tools:context=".activities.LoginActivity"
     android:background="#D928327E">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="564dp"
-        android:layout_height="250dp"
-        android:layout_gravity="top"
-        android:src="@drawable/easyshoplogo2" />
-
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/uppercontainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="564dp"
+            android:layout_height="250dp"
+            android:layout_gravity="top"
+            android:src="@drawable/easyshoplogo2" />
+    </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/lowercontainer"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_below="@+id/uppercontainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="339dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="284dp"
-        android:layout_marginEnd="40dp"
-        android:hint="@string/prompt_email"
-        android:inputType="textEmailAddress"
-        android:selectAllOnFocus="true"
-        android:textColor="@color/colorWhite"
-        android:textColorHint="@color/colorWhite" />
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="336dp"
+                android:layout_height="55dp"
+                android:layout_centerHorizontal="true"
+                android:hint="@string/prompt_email"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionDone"
+                android:inputType="textEmailAddress"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite" />
 
-    <EditText
+            <EditText
         android:id="@+id/password"
         android:layout_width="336dp"
         android:layout_height="62dp"
@@ -86,7 +90,7 @@
             android:layout_marginBottom="64dp"
             android:visibility="gone" />
 
-    <TextView
+        <TextView
         android:id="@+id/textend"
         android:layout_width="316dp"
         android:layout_height="42dp"
@@ -98,5 +102,4 @@
         android:textSize="12dp"
         android:textStyle="italic" />
         </RelativeLayout>
-    </ScrollView>
 </RelativeLayout>
