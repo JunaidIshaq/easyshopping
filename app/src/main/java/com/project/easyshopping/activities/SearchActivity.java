@@ -159,6 +159,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 		categoriesList.add("Clothing");
 		categoriesList.add("Phones");
 		categoriesList.add("Cars");
+		categoriesList.add("Shoes");
 
 		subCategoriesList.add("Select SubCategory");
 
@@ -212,7 +213,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 			case R.id.menu_faq: {
 				// Finishing current activity.
 				finish();
-				// Redirect to Feedback Activity.
+				// Redirect to Faqs Activity.
 				Intent intent = new Intent(SearchActivity.this, FaqsActivity.class);
 				startActivity(intent);
 				break;
@@ -262,6 +263,9 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 			}else if(parent.getSelectedItem() == "Cars"){
 				subCategoresList.add("Brand New");
 				subCategoresList.add("Used");
+			}else if(parent.getSelectedItem() == "Shoes"){
+				subCategoresList.add("Brands");
+				subCategoresList.add("Mall");
 			}
 			dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, subCategoresList);
 			dataAdapter.setDropDownViewResource(R.layout.spinner_item);
@@ -364,9 +368,6 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 					for(int i = 0; i< itemsArray.length(); i++) {
 						JSONObject itemsObject = itemsArray.getJSONObject(i);
 						Uri uri = null;
-//						if(itemsObject.getJSONObject("pagemap") != null && itemsObject.getJSONObject("pagemap").getJSONArray("cse_thumbnail") != null) {
-//							uri = Uri.parse(itemsObject.getJSONObject("pagemap").getJSONArray("cse_thumbnail").getJSONObject(0).getString("src"));
-//						}
 						RowItem rowItem = new RowItem(itemsObject.getString("title"), R.drawable.easyshoplogoasset, itemsObject.getString("link"));
 						rowItems.add(rowItem);
 					}
