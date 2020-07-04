@@ -16,9 +16,9 @@
 
         <ImageView
             android:id="@+id/cityImage"
-            android:background="@drawable/city_icon"
+            android:background="@drawable/city"
             android:layout_width="72dp"
-            android:layout_height="match_parent"
+            android:layout_height="75dp"
             android:padding="10px"></ImageView>
 
         <Spinner
@@ -26,7 +26,7 @@
             android:layout_width="368dp"
             android:layout_height="59dp"
             android:layout_alignEnd="@+id/progressBar1"
-            android:popupBackground="#4057DA"
+            android:popupBackground="#ECEEF8"
             android:prompt="@string/select_city"
             android:textColor="#0F0E10" />
     </TableRow>
@@ -38,9 +38,9 @@
 
     <ImageView
             android:id="@+id/categoryImage"
-            android:background="@drawable/category_icon"
+            android:background="@drawable/categoryyy"
             android:layout_width="72dp"
-            android:layout_height="match_parent"
+            android:layout_height="75dp"
             android:padding="10px"></ImageView>
 
         <Spinner
@@ -50,7 +50,7 @@
             android:layout_alignEnd="@+id/progressBar1"
             android:prompt="@string/select_category"
             android:textColor="#0A0A0B"
-            android:popupBackground="#4057DA"/>
+            android:popupBackground="#ECEEF8"/>
     </TableRow>
 
     <TableRow
@@ -58,11 +58,11 @@
         android:layout_width="match_parent"
         android:padding="10px">
 
-    <ImageView
+        <ImageView
             android:id="@+id/subCategoryImage"
-            android:background="@drawable/subcategory_icon"
             android:layout_width="72dp"
-            android:layout_height="match_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/subcat"
             android:padding="10px"></ImageView>
 
         <Spinner
@@ -71,8 +71,8 @@
             android:layout_height="59dp"
             android:layout_alignEnd="@+id/progressBar1"
             android:prompt="@string/select_subcategory"
-            android:textColor="#090809"
-            android:popupBackground="#4057DA"/>
+            android:textColor="#141517"
+            android:popupBackground="#ECEEF8"/>
     </TableRow>
 
     <Button

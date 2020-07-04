@@ -367,7 +367,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 //						if(itemsObject.getJSONObject("pagemap") != null && itemsObject.getJSONObject("pagemap").getJSONArray("cse_thumbnail") != null) {
 //							uri = Uri.parse(itemsObject.getJSONObject("pagemap").getJSONArray("cse_thumbnail").getJSONObject(0).getString("src"));
 //						}
-						RowItem rowItem = new RowItem(itemsObject.getString("title"), R.drawable.easy_shopping_logo, itemsObject.getString("link"));
+						RowItem rowItem = new RowItem(itemsObject.getString("title"), R.drawable.easyshoplogoasset, itemsObject.getString("link"));
 						rowItems.add(rowItem);
 					}
 					customAdapter = new CustomAdapter(SearchActivity.this , rowItems);
