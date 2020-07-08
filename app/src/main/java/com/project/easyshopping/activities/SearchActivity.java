@@ -105,23 +105,54 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 			@Override
 			public void onClick(View v) {
 				StringBuilder searchAPI = new StringBuilder(googleSearchAPI);
-				if(searchCity == null) {
+				if (searchCity == null) {
 					Toast.makeText(SearchActivity.this, "Please select city", Toast.LENGTH_SHORT).show();
 					return;
-				}
-				else if(searchCategory == null) {
-					Toast.makeText(SearchActivity.this,"Please select category", Toast.LENGTH_SHORT).show();
+				} else if (searchCategory == null) {
+					Toast.makeText(SearchActivity.this, "Please select category", Toast.LENGTH_SHORT).show();
 					return;
 				}
 				progressDialog.setTitle("Searching Popular E Stores");
 				progressDialog.setMessage("Please wait...");
 				progressDialog.setCanceledOnTouchOutside(true);
 				progressDialog.show();
-				String searchText = "Food in Islamabad";
+				StringBuilder searchText = new StringBuilder();
 				String cX = "";
 				URL url = null;
+				if (searchCategory.equals("Food")) {
+					if (searchSubCategory.equals("Fast Food")) {
+						searchText.append("Fast+Food+Order+Online");
+					} else {
+						searchText.append("Restaurants+Food+Order+Online");
+					}
+				} else if (searchCategory.equals("Clothing")) {
+					if (searchSubCategory.equals("Brands")) {
+						searchText.append("Clothing+Brands+Order+Online");
+					} else {
+						searchText.append("Clothing+Malls+Order+Online");
+					}
+				} else if (searchCategory.equals("Phones")) {
+					if (searchSubCategory.equals("Brand New")) {
+						searchText.append("Brand+New+Phones+Order+Online");
+					} else {
+						searchText.append("Used+Phones+Stores+Order+Online");
+					}
+				} else if (searchCategory.equals("Cars")) {
+					if (searchSubCategory.equals("Brand New")) {
+						searchText.append("Brand+New+Cars+Order+Online");
+					} else {
+						searchText.append("Used+Cars+Websites+Order+Online");
+					}
+				} else if (searchCategory.equals("Shoes")) {
+					if (searchSubCategory.equals("Brands")) {
+						searchText.append("Shoes+Brands+Order+Online");
+					} else {
+						searchText.append("Shoes+Malls+Order+Online");
+					}
+				}
+
 				try {
-					url = new URL(searchAPI.append(searchCategory).append("%20").append(joinString(searchSubCategory.split("\\s"))).append("%20").append("Order%20Online%20").append("in%20").append(searchCity).append("&alt=json").toString());
+					url = new URL(searchAPI.append(searchText.append("+near+by+").append(searchCity).append("&alt=json")).toString());
 				} catch (MalformedURLException ex ){
 					Log.e(TAG, "Error Creating String to URL " + ex.toString());
 				}
@@ -129,8 +160,6 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 
 				GoogleSearchAsyncTask searchTask = new GoogleSearchAsyncTask();
 				searchTask.execute(url);
-//				List<Result> results = search(searchQuery.append(searchCategory).append("%20").append(joinString(searchSubCategory.split("\\s"))).append("%20").append("Order%20Online%20").append("in%20").append(searchCity).append("&alt=json").toString());
-//				setAdapter(results);
 				rowItems.clear();
 
 			}
@@ -159,6 +188,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 		categoriesList.add("Clothing");
 		categoriesList.add("Phones");
 		categoriesList.add("Cars");
+		categoriesList.add("Shoes");
 
 		subCategoriesList.add("Select SubCategory");
 
@@ -212,7 +242,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 			case R.id.menu_faq: {
 				// Finishing current activity.
 				finish();
-				// Redirect to Feedback Activity.
+				// Redirect to Faqs Activity.
 				Intent intent = new Intent(SearchActivity.this, FaqsActivity.class);
 				startActivity(intent);
 				break;
@@ -262,6 +292,9 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 			}else if(parent.getSelectedItem() == "Cars"){
 				subCategoresList.add("Brand New");
 				subCategoresList.add("Used");
+			}else if(parent.getSelectedItem() == "Shoes"){
+				subCategoresList.add("Brands");
+				subCategoresList.add("Mall");
 			}
 			dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, subCategoresList);
 			dataAdapter.setDropDownViewResource(R.layout.spinner_item);
@@ -364,9 +397,6 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 					for(int i = 0; i< itemsArray.length(); i++) {
 						JSONObject itemsObject = itemsArray.getJSONObject(i);
 						Uri uri = null;
-//						if(itemsObject.getJSONObject("pagemap") != null && itemsObject.getJSONObject("pagemap").getJSONArray("cse_thumbnail") != null) {
-//							uri = Uri.parse(itemsObject.getJSONObject("pagemap").getJSONArray("cse_thumbnail").getJSONObject(0).getString("src"));
-//						}
 						RowItem rowItem = new RowItem(itemsObject.getString("title"), R.drawable.easyshoplogoasset, itemsObject.getString("link"));
 						rowItems.add(rowItem);
 					}
@@ -386,9 +416,9 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	 * @return
 	 */
 	private String joinString(String[] element) {
-		String mergeString = null;
+		String mergeString = "";
 		for(int i = 0; i < (element.length -1); i++ ) {
-			mergeString = element[i] + "%20";
+			mergeString = element[i] + "+";
 		}
 		return mergeString + element[element.length - 1 ];
 	}

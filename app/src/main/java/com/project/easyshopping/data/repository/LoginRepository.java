@@ -1,5 +1,7 @@
-package com.project.easyshopping.data;
+package com.project.easyshopping.data.repository;
 
+import com.project.easyshopping.data.LoginDataSource;
+import com.project.easyshopping.data.Result;
 import com.project.easyshopping.data.model.LoggedInUser;
 
 /**
