@@ -121,7 +121,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 				String cX = "";
 				URL url = null;
 				try {
-					url = new URL(searchAPI.append(searchCategory).append("%20").append(joinString(searchSubCategory.split("\\s"))).append("%20").append("Order%20Online%20").append("in%20").append(searchCity).append("&alt=json").toString());
+					url = new URL(searchAPI.append(joinString(searchSubCategory.split("\\s"))).append("+").append(joinString(searchCategory.split("\\s"))).append("+").append("online+shopping+websites").append("+in+").append(searchCity).append("&alt=json").toString());
 				} catch (MalformedURLException ex ){
 					Log.e(TAG, "Error Creating String to URL " + ex.toString());
 				}
@@ -129,8 +129,6 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 
 				GoogleSearchAsyncTask searchTask = new GoogleSearchAsyncTask();
 				searchTask.execute(url);
-//				List<Result> results = search(searchQuery.append(searchCategory).append("%20").append(joinString(searchSubCategory.split("\\s"))).append("%20").append("Order%20Online%20").append("in%20").append(searchCity).append("&alt=json").toString());
-//				setAdapter(results);
 				rowItems.clear();
 
 			}
@@ -387,9 +385,9 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	 * @return
 	 */
 	private String joinString(String[] element) {
-		String mergeString = null;
+		String mergeString = "";
 		for(int i = 0; i < (element.length -1); i++ ) {
-			mergeString = element[i] + "%20";
+			mergeString = element[i] + "+";
 		}
 		return mergeString + element[element.length - 1 ];
 	}

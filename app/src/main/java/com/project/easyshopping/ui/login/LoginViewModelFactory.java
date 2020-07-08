@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
 
 import com.project.easyshopping.data.LoginDataSource;
-import com.project.easyshopping.data.LoginRepository;
+import com.project.easyshopping.data.repository.LoginRepository;
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

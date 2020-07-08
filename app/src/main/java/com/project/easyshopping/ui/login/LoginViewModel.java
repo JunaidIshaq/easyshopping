@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
-import com.project.easyshopping.data.LoginRepository;
+import com.project.easyshopping.data.repository.LoginRepository;
 import com.project.easyshopping.data.Result;
 import com.project.easyshopping.data.model.LoggedInUser;
 import com.project.easyshopping.R;
