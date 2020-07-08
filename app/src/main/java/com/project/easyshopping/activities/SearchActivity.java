@@ -105,23 +105,54 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 			@Override
 			public void onClick(View v) {
 				StringBuilder searchAPI = new StringBuilder(googleSearchAPI);
-				if(searchCity == null) {
+				if (searchCity == null) {
 					Toast.makeText(SearchActivity.this, "Please select city", Toast.LENGTH_SHORT).show();
 					return;
-				}
-				else if(searchCategory == null) {
-					Toast.makeText(SearchActivity.this,"Please select category", Toast.LENGTH_SHORT).show();
+				} else if (searchCategory == null) {
+					Toast.makeText(SearchActivity.this, "Please select category", Toast.LENGTH_SHORT).show();
 					return;
 				}
 				progressDialog.setTitle("Searching Popular E Stores");
 				progressDialog.setMessage("Please wait...");
 				progressDialog.setCanceledOnTouchOutside(true);
 				progressDialog.show();
-				String searchText = "Food in Islamabad";
+				StringBuilder searchText = new StringBuilder();
 				String cX = "";
 				URL url = null;
+				if (searchCategory.equals("Food")) {
+					if (searchSubCategory.equals("Fast Food")) {
+						searchText.append("Fast+Food+Order+Online");
+					} else {
+						searchText.append("Restaurants+Food+Order+Online");
+					}
+				} else if (searchCategory.equals("Clothing")) {
+					if (searchSubCategory.equals("Brands")) {
+						searchText.append("Clothing+Brands+Order+Online");
+					} else {
+						searchText.append("Clothing+Malls+Order+Online");
+					}
+				} else if (searchCategory.equals("Phones")) {
+					if (searchSubCategory.equals("Brand New")) {
+						searchText.append("Brand+New+Phones+Order+Online");
+					} else {
+						searchText.append("Used+Phones+Stores+Order+Online");
+					}
+				} else if (searchCategory.equals("Cars")) {
+					if (searchSubCategory.equals("Brand New")) {
+						searchText.append("Brand+New+Cars+Order+Online");
+					} else {
+						searchText.append("Used+Cars+Websites+Order+Online");
+					}
+				} else if (searchCategory.equals("Shoes")) {
+					if (searchSubCategory.equals("Brands")) {
+						searchText.append("Shoes+Brands+Order+Online");
+					} else {
+						searchText.append("Shoes+Malls+Order+Online");
+					}
+				}
+
 				try {
-					url = new URL(searchAPI.append(joinString(searchSubCategory.split("\\s"))).append("+").append(joinString(searchCategory.split("\\s"))).append("+").append("online+shopping+websites").append("+in+").append(searchCity).append("&alt=json").toString());
+					url = new URL(searchAPI.append(searchText.append("+near+by+").append(searchCity).append("&alt=json")).toString());
 				} catch (MalformedURLException ex ){
 					Log.e(TAG, "Error Creating String to URL " + ex.toString());
 				}
