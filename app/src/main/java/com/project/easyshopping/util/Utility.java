@@ -127,4 +127,8 @@ public class Utility {
 		return NetworkReceiver.isConnected();
 	}
 
+	public static boolean validateEmailAddress(String email) {
+			String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+			return email.matches(regex);
+	}
 }

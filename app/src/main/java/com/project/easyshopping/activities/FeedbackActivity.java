@@ -24,7 +24,8 @@ import com.project.easyshopping.util.Utility;
 import java.util.Date;
 
 public class FeedbackActivity extends AppCompatActivity implements NetworkReceiver.NetworkListener {
-   private EditText name, email , city, message;
+
+   private EditText name, email, city, message;
    private Button sendmessage;
    private RatingBar rate;
    Toolbar toolbar;
@@ -56,21 +57,39 @@ public class FeedbackActivity extends AppCompatActivity implements NetworkReceiv
 
 
         sendmessage.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                FeedBackDTO dto = new FeedBackDTO();
-                dto.setName(name.getText().toString());
-                dto.setEmail(email.getText().toString());
-                dto.setCity(city.getText().toString());
-                dto.setMessage(message.getText().toString());
-                dto.setRate(String.valueOf(rate.getRating()));
-                dto.setDateTime(new Date());
-                sendUserFeedBack(FirebaseAuth.getInstance().getUid(), dto);
-                Toast.makeText(FeedbackActivity.this, "Your feedback saved successfully", Toast.LENGTH_SHORT).show();
-
+                String validationMessage = validateData();
+                if(validationMessage.equals("")){
+                    FeedBackDTO dto = new FeedBackDTO();
+                    dto.setName(name.getText().toString());
+                    dto.setEmail(email.getText().toString());
+                    dto.setCity(city.getText().toString());
+                    dto.setMessage(message.getText().toString());
+                    dto.setRate(String.valueOf(rate.getRating()));
+                    dto.setDateTime(new Date());
+                    sendUserFeedBack(FirebaseAuth.getInstance().getUid(), dto);
+                    Toast.makeText(FeedbackActivity.this, "Your feedback saved successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(FeedbackActivity.this, validationMessage , Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
+
+    public String validateData() {
+            if(name.getText() == null || name.getText().toString().equals("")){
+                return "Please enter your name" ;
+            }else if(email.getText() == null || email.getText().toString().equals("")) {
+                return "Please enter your email id";
+            }else if(!Utility.validateEmailAddress(email.getText().toString())){
+                 return "Please enter your valid email id";
+            }else if(city.getText() == null || city.getText().toString().equals("")){
+                return "Please enter your city";
+            }else if(message.getText() == null || message.getText().toString().equals("")){
+                return"Please enter message";
+            }
+        return "";
     }
 
     private void setSupportActionBar(Toolbar toolbar) {
