@@ -3,6 +3,8 @@ package com.project.easyshopping.activities;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,20 +29,23 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.project.easyshopping.broadcasts.NetworkReceiver;
 import com.project.easyshopping.R;
 import com.project.easyshopping.ui.login.LoggedInUserView;
 import com.project.easyshopping.ui.login.LoginFormState;
 import com.project.easyshopping.ui.login.LoginResult;
 import com.project.easyshopping.ui.login.LoginViewModel;
 import com.project.easyshopping.ui.login.LoginViewModelFactory;
+import com.project.easyshopping.util.Utility;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements NetworkReceiver.NetworkListener {
 
     private LoginViewModel loginViewModel;
 
     private FirebaseAuth firebaseAuth;
 
-    private FirebaseUser currentUser;
+    private static FirebaseUser currentUser;
+    NetworkReceiver networkReceiver = new NetworkReceiver();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                     passwordEditText.setError(getString(loginFormState.getPasswordError()));
                 }
             }
+
         });
 
         loginViewModel.getLoginResult().observe(this,
@@ -180,10 +186,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void loginUser(String email, String password) {
-
-    }
-
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
@@ -202,9 +204,34 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkReceiver, intentFilter);
+        MyApplication.getInstance().setNetworkListener(this);
         if(currentUser != null) {
             Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
             startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(networkReceiver);
+    }
+
+    public static boolean isUserloggedIn() {
+        if(currentUser != null){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public void onNetworkChangedListener(boolean isConnected) {
+        if(!isConnected){
+            Utility.sendToOfflineActivity(this);
         }
     }
 

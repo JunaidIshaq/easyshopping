@@ -3,8 +3,10 @@
     package="com.project.easyshopping">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <application
+        android:name=".activities.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/neweasyshoplogoasset1"
         android:label="@string/app_name"
@@ -35,6 +37,10 @@
 
         <activity
             android:name=".activities.FaqsActivity">
+        </activity>
+
+        <activity
+            android:name=".activities.OfflineActivity">
         </activity>
     </application>
 

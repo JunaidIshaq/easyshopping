@@ -2,6 +2,8 @@ package com.project.easyshopping.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.webkit.WebView;
@@ -10,15 +12,20 @@ import android.widget.Toolbar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.project.easyshopping.broadcasts.NetworkReceiver;
 import com.project.easyshopping.R;
+import com.project.easyshopping.util.Utility;
 
-public class WebViewActivity extends AppCompatActivity {
+public class WebViewActivity extends AppCompatActivity implements NetworkReceiver.NetworkListener {
 
     WebView mWebView;
     String title;
     String webUrl;
     private ProgressDialog progressDialog;
     Toolbar toolbar;
+
+    NetworkReceiver networkReceiver = new NetworkReceiver();
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,5 +70,22 @@ public class WebViewActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkReceiver, intentFilter);
+        MyApplication.getInstance().setNetworkListener((NetworkReceiver.NetworkListener) this);
+    }
+
+
+    @Override
+    public void onNetworkChangedListener(boolean isConnected) {
+        if(!isConnected){
+            Utility.sendToOfflineActivity(this);
+        }
     }
 }

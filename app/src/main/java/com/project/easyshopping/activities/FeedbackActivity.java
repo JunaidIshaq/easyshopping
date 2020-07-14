@@ -1,6 +1,8 @@
 package com.project.easyshopping.activities;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,17 +17,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.project.easyshopping.R;
+import com.project.easyshopping.broadcasts.NetworkReceiver;
 import com.project.easyshopping.data.model.FeedBackDTO;
+import com.project.easyshopping.util.Utility;
 
 import java.util.Date;
 
-public class FeedbackActivity extends AppCompatActivity
-
-{
+public class FeedbackActivity extends AppCompatActivity implements NetworkReceiver.NetworkListener {
    private EditText name, email , city, message;
    private Button sendmessage;
    private RatingBar rate;
    Toolbar toolbar;
+    NetworkReceiver networkReceiver = new NetworkReceiver();
 
 
 
@@ -91,5 +94,27 @@ public class FeedbackActivity extends AppCompatActivity
         Intent intent=new Intent(this,SearchActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkReceiver, intentFilter);
+        MyApplication.getInstance().setNetworkListener(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(networkReceiver);
+    }
+
+    @Override
+    public void onNetworkChangedListener(boolean isConnected) {
+        if(!isConnected){
+            Utility.sendToOfflineActivity(this);
+        }
     }
 }

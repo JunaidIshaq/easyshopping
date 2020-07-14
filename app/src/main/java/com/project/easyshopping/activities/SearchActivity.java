@@ -2,6 +2,8 @@ package com.project.easyshopping.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,9 +22,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.project.easyshopping.broadcasts.NetworkReceiver;
 import com.project.easyshopping.R;
 import com.project.easyshopping.data.model.CustomAdapter;
 import com.project.easyshopping.data.model.RowItem;
+import com.project.easyshopping.util.Utility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,7 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class SearchActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+public class SearchActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener , NetworkReceiver.NetworkListener {
 
 	private FirebaseAuth firebaseAuth;
 	String currentUser;
@@ -70,6 +74,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	static String result = null;
 	Integer responseCode = null;
 	String responseMessage = "";
+	NetworkReceiver networkReceiver = new NetworkReceiver();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -254,9 +259,19 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	@Override
 	protected void onStart() {
 		super.onStart();
+		final IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+		registerReceiver(networkReceiver, intentFilter);
+		MyApplication.getInstance().setNetworkListener( this);
 		if(currentUser == null) {
 			sendUserToLoginActivity();
 		}
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		unregisterReceiver(networkReceiver);
 	}
 
 	private void sendUserToLoginActivity() {
@@ -310,6 +325,13 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
 
+	}
+
+	@Override
+	public void onNetworkChangedListener(boolean isConnected) {
+		if(!isConnected){
+			Utility.sendToOfflineActivity(this);
+		}
 	}
 
 	private class GoogleSearchAsyncTask extends AsyncTask<URL, Integer, String> {
@@ -421,5 +443,10 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 			mergeString = element[i] + "+";
 		}
 		return mergeString + element[element.length - 1 ];
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 	}
 }

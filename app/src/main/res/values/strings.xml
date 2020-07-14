@@ -8,6 +8,7 @@
     <string name="welcome_screen">Welcome to this screen !!!</string>
     <string name="search_items">Search Items</string>
     <string name="action_register">Register</string>
+    <string name="retry">Retry</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_email">Not a valid email</string>
     <string name="invalid_password">Password must be > 5 characters</string>
