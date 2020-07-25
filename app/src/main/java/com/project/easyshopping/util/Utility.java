@@ -73,26 +73,6 @@ public class Utility {
 	}
 	
 	/**
-	 * validates text field
-	 * 
-	 * @param url
-	 * @param context
-	 * @return
-	 */
-	public static boolean validatURL(String url, Context context) {
-		boolean isValid = true;
-
-		if (TextUtils.isEmpty(url)) {
-			Toast.makeText(context, "Enter Seed URL", Toast.LENGTH_SHORT).show();
-			isValid = false;
-		}else if(!checkLink(url)){
-			Toast.makeText(context, "Improper URL Please enter valid URL example \n http://www.wikipedia.org \n https://www.google.com ", Toast.LENGTH_LONG).show();
-			isValid = false;
-		}
-		return isValid;
-	}
-	
-	/**
 	 * function which validate links 
 	 * @param1 String: URL
 	 * @return

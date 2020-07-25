@@ -67,10 +67,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 	String searchSubCategory;
 	String searchCity;
 	String googleSearchAPI = "https://www.googleapis.com/customsearch/v1?key=AIzaSyCbcrx3RKOQxKspMkZCV-uhhDMtlYrZFAw&cx=004505579087157181330:ppsddjwrvuz&q=";
-	private static final String GOOGLE_API_KEY = "AIzaSyCbcrx3RKOQxKspMkZCV-uhhDMtlYrZFAw";
-	private static final String SEARCH_ENGINE_ID = "004505579087157181330:ppsddjwrvuz";
 	private static final String TAG = "Search Activity";
-	private static final int HTTP_REQUEST_TIMEOUT = 3 * 600000;
 	static String result = null;
 	Integer responseCode = null;
 	String responseMessage = "";
@@ -429,20 +426,6 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 				e.printStackTrace();
 			}
 		}
-	}
-
-	/**
-	 *  String[] is concatenated with %20 because it is a space in subcategory
-	 *  It needs to be removed.
-	 * @param element
-	 * @return
-	 */
-	private String joinString(String[] element) {
-		String mergeString = "";
-		for(int i = 0; i < (element.length -1); i++ ) {
-			mergeString = element[i] + "+";
-		}
-		return mergeString + element[element.length - 1 ];
 	}
 
 	@Override

@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkReceiver.
     private FirebaseAuth firebaseAuth;
 
     private static FirebaseUser currentUser;
+
     NetworkReceiver networkReceiver = new NetworkReceiver();
 
     @Override
