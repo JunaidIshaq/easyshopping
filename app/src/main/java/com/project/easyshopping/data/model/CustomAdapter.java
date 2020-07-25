@@ -2,6 +2,8 @@ package com.project.easyshopping.data.model;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import com.project.easyshopping.R;
 
+import java.io.FileInputStream;
 import java.util.List;
 
 public class CustomAdapter extends BaseAdapter {
@@ -50,23 +53,21 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ViewHolder viewHolder = null;
-
-        LayoutInflater mInflator = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        if(convertView == null) {
+        ViewHolder viewHolder;
+          if(convertView == null) {
+            LayoutInflater mInflator = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflator.inflate(R.layout.activity_listview, null);
+          }
             viewHolder = new ViewHolder();
             viewHolder.title = convertView.findViewById(R.id.title);
             viewHolder.imageLink = convertView.findViewById(R.id.image);
             viewHolder.description = convertView.findViewById(R.id.description);
-
             RowItem row_pos = rowItems.get(position);
-
-            viewHolder.imageLink.setImageResource(row_pos.getImageId());
+            viewHolder.imageLink.setImageResource(row_pos.getImage());
             viewHolder.title.setText(row_pos.getTitle());
             viewHolder.description.setText(row_pos.getLink());
             convertView.setTag(viewHolder);
-        }
         return convertView;
     }
+
 }

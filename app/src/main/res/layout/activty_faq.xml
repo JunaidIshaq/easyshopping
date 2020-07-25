@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#8496FA"
+    tools:context=".activities.FaqsActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/newtext"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="#0E0D0D"
+        android:gravity="center"
+        android:text="@string/faq"
+        android:textColor="@android:color/white"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/qs1"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@id/newtext"
+        android:layout_marginTop="32dp"
+        android:text="1. How does login/register work?"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/ans1"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:layout_below="@id/qs1"
+        android:layout_marginTop="14dp"
+        android:text="A. Just simply enter email and password and click register then click login. "
+        android:textColor="@android:color/black"
+        android:textSize="18dp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/qs2"
+        android:layout_width="match_parent"
+        android:layout_height="49sp"
+        android:layout_below="@id/qs1"
+        android:layout_marginTop="89dp"
+        android:text="2. How do we select city and other categories?"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ans2"
+                android:layout_width="match_parent"
+                android:layout_height="45sp"
+                android:layout_below="@id/qs2"
+                android:layout_marginTop="130dp"
+                android:text="A. Login into the system and select any city and category."
+                android:textColor="@android:color/black"
+                android:textSize="18dp"
+                android:textStyle="normal" />
+
+            <TextView
+        android:id="@+id/qs3"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@id/qs2"
+        android:layout_marginTop="94dp"
+        android:text="3. How do we go to browser?"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ans3"
+                android:layout_width="match_parent"
+                android:layout_height="45sp"
+                android:layout_below="@id/qs3"
+                android:layout_marginTop="-110dp"
+                android:text="A. When we click search button we will have links by clicking on them you will redirect to browser."
+                android:textColor="@android:color/black"
+                android:textSize="18dp"
+                android:textStyle="normal" />
+
+            <TextView
+        android:id="@+id/qs4"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@id/qs3"
+        android:layout_marginTop="78dp"
+        android:text="4. Can we give feedback?"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/ans4"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:layout_below="@id/qs4"
+        android:layout_marginTop="6dp"
+        android:text="A. Yes you can give feedback by typing your name,email,city and message."
+        android:textColor="@android:color/black"
+        android:textSize="18dp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/qs5"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@id/qs4"
+        android:layout_marginTop="81dp"
+        android:text="5. Can we select multiple categories?"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/ans5"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:layout_below="@id/qs5"
+        android:layout_marginTop="17dp"
+        android:text="A. No you can select only one category at a time and one city."
+        android:textColor="@android:color/black"
+        android:textSize="18dp"
+        android:textStyle="normal" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

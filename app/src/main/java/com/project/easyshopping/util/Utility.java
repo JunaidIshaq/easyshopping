@@ -1,12 +1,16 @@
 package com.project.easyshopping.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 import android.widget.Toast;
+
+import com.project.easyshopping.broadcasts.NetworkReceiver;
+import com.project.easyshopping.activities.OfflineActivity;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -26,12 +30,12 @@ public class Utility {
 	 * @return true if connnection is available
 	 */
 	public final static boolean isInternetAvailable(Context context) {
-		if ((!isNetworkAvailable(context))
-				&& (!isWifiAvailable(context))) {
-			Toast.makeText(context, "Internet Unavailable", Toast.LENGTH_SHORT).show();
+		if (isNetworkAvailable(context) || isWifiAvailable(context)) {
+			return true;
+		} else {
+			Toast.makeText(context, "No Internet Available", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		return true;
 	}
 
 	/**
@@ -69,26 +73,6 @@ public class Utility {
 	}
 	
 	/**
-	 * validates text field
-	 * 
-	 * @param url
-	 * @param context
-	 * @return
-	 */
-	public static boolean validatURL(String url, Context context) {
-		boolean isValid = true;
-
-		if (TextUtils.isEmpty(url)) {
-			Toast.makeText(context, "Enter Seed URL", Toast.LENGTH_SHORT).show();
-			isValid = false;
-		}else if(!checkLink(url)){
-			Toast.makeText(context, "Improper URL Please enter valid URL example \n http://www.wikipedia.org \n https://www.google.com ", Toast.LENGTH_LONG).show();
-			isValid = false;
-		}
-		return isValid;
-	}
-	
-	/**
 	 * function which validate links 
 	 * @param1 String: URL
 	 * @return
@@ -112,6 +96,19 @@ public class Utility {
 		}
 		return url;
 	}
-	
 
+	public static void sendToOfflineActivity(Context context){
+			Intent intent = new Intent(context, OfflineActivity.class);
+			context.startActivity(intent);
+			Toast.makeText(context, "No Internet Available", Toast.LENGTH_LONG).show();
+	}
+
+	public static boolean checkConnection() {
+		return NetworkReceiver.isConnected();
+	}
+
+	public static boolean validateEmailAddress(String email) {
+			String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+			return email.matches(regex);
+	}
 }
