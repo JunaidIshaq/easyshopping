@@ -34,6 +34,7 @@
     <string name="select_city">Select City</string>
     <string name="select_category">Select Category</string>
     <string name="select_subcategory">Select SubCategory</string>
+    <string name="no_history_found">Sorry, No History Found</string>
 
     <string-array name="cities">
         <item>Select City</item>

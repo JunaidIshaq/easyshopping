@@ -19,15 +19,17 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.project.easyshopping.R;
 import com.project.easyshopping.data.model.CustomAdapter;
 import com.project.easyshopping.data.model.RowItem;
-import com.project.easyshopping.entities.SearchHistoryDTO;
+import com.project.easyshopping.dto.SearchHistoryDTO;
 import com.project.easyshopping.broadcasts.NetworkReceiver;
 import com.project.easyshopping.util.Utility;
 
@@ -104,15 +106,27 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		SearchHistoryDTO dto = new SearchHistoryDTO(new Date(), rowItems.get(position).getLink());
-		if(!dto.equals("")){
-			databaseReference.setValue(dto);
-		}
+		SearchHistoryDTO dto = new SearchHistoryDTO(new Date() ,rowItems.get(position).getTitle(), rowItems.get(position).getLink());
+		saveSearchHistory(FirebaseAuth.getInstance().getUid() , dto);
 		Intent intent = new Intent(SearchActivity.this, WebViewActivity.class);
 		intent.putExtra("title", rowItems.get(position).getTitle());
 		intent.putExtra("url", rowItems.get(position).getLink());
 		startActivity(intent);
 	}
+
+	private static void saveSearchHistory(String userId, SearchHistoryDTO dto) {
+		if(dto != null){
+			DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+			reference.child("users_search_history").child(userId).push().setValue(dto).addOnFailureListener(new OnFailureListener() {
+				@Override
+				public void onFailure(@NonNull Exception e) {
+					Log.d(TAG, e.getLocalizedMessage());
+				}
+			});
+		}
+	}
+
+
 
 	private void addListenerOnButton() {
 
@@ -250,7 +264,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 				// Finishing current activity.
 				finish();
 				// Redirect to Feedback Activity.
-				Intent intent = new Intent(SearchActivity.this, FeedbackActivity.class);
+				Intent intent = new Intent(SearchActivity.this, FeedBackActivity.class);
 				startActivity(intent);
 				break;
 			}
@@ -260,6 +274,15 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 				finish();
 				// Redirect to Faqs Activity.
 				Intent intent = new Intent(SearchActivity.this, FaqsActivity.class);
+				startActivity(intent);
+				break;
+			}
+
+			case R.id.menu_history: {
+				// Finishing current activity
+				finish();
+				// Redirect to SearchHistoryActivity
+				Intent intent = new Intent(SearchActivity.this, ShowHistoryActivity.class);
 				startActivity(intent);
 				break;
 			}

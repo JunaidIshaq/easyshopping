@@ -1,4 +1,4 @@
-package com.project.easyshopping.data.model;
+package com.project.easyshopping.dto;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
