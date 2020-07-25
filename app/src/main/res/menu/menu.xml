@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-<<<<<<< HEAD
 
     <item
         android:id="@+id/history"
         android:orderInCategory="100"
         android:title="@string/history"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/menu_settings"
-        android:orderInCategory="100"
-        android:title="@string/menu_settings"
-        app:showAsAction="never" />
-=======
->>>>>>> c89d467c7af88d32cb44b9677e2fea2f0be8c336
 
     <item
         android:id="@+id/menu_sign_out"
