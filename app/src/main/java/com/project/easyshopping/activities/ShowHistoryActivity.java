@@ -89,7 +89,7 @@ public class ShowHistoryActivity extends AppCompatActivity implements AdapterVie
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.e(TAG, databaseError.getMessage());
             }
         });
     }
@@ -126,7 +126,7 @@ public class ShowHistoryActivity extends AppCompatActivity implements AdapterVie
             reference.child("users_search_history").child(userId).push().setValue(dto).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Log.d(TAG, e.getLocalizedMessage());
+                    Log.e(TAG, e.getLocalizedMessage());
                 }
             });
         }
