@@ -32,7 +32,7 @@
             android:name=".activities.WebViewActivity">
         </activity>
         <activity
-            android:name=".activities.FeedbackActivity">
+            android:name=".activities.FeedBackActivity">
         </activity>
 
         <activity
@@ -41,6 +41,10 @@
 
         <activity
             android:name=".activities.OfflineActivity">
+        </activity>
+
+        <activity
+            android:name=".activities.ShowHistoryActivity">
         </activity>
     </application>
 

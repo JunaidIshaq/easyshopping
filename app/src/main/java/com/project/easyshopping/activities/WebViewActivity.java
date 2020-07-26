@@ -88,4 +88,10 @@ public class WebViewActivity extends AppCompatActivity implements NetworkReceive
             Utility.sendToOfflineActivity(this);
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(networkReceiver);
+    }
 }
